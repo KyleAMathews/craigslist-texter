@@ -2,6 +2,8 @@ FeedParser = require('feedparser')
 request = require('request')
 _ = require('underscore')
 winston = require('winston')
+winston.remove(winston.transports.Console)
+winston.add(winston.transports.Console, { timestamp: true })
 
 # Setup twilio client.
 twilioClient = require('twilio')()
@@ -17,7 +19,7 @@ sendSMS = (body) ->
     if err
       winston.error err
     else
-      winston.log 'sent message', message
+      winston.info 'sent message', message
   )
 
 pollCraigslist = ->
@@ -47,7 +49,7 @@ pollCraigslist = ->
           for post in newPostings
             sendSMS("New room postings for inner sunset: #{ post }")
         else
-          console.log 'no new postings'
+          winston.info 'no new postings'
     )
 
 pollCraigslist()
