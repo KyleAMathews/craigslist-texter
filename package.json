@@ -1,0 +1,19 @@
+{
+  "name": "craigslist-texter",
+  "version": "0.0.1",
+  "description": "Poll a criagslist rss feed and text new postings as they show up",
+  "main": "index.js",
+  "dependencies": {
+    "feedparser": "~0.16.5",
+    "twilio": "~1.5.0",
+    "underscore": "~1.5.2",
+    "request": "~2.33.0",
+    "winston": "~0.7.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "license": "BSD-2-Clause"
+}
