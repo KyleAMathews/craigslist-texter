@@ -3,7 +3,7 @@ request = require('request')
 _ = require('underscore')
 winston = require('winston')
 winston.remove(winston.transports.Console)
-winston.add(winston.transports.Console, { timestamp: true })
+winston.add(winston.transports.Console, { timestamp: true, colorize: true })
 
 # Setup twilio client.
 twilioClient = require('twilio')()
@@ -16,17 +16,17 @@ sendSMS = (body) ->
     to: process.env.TO_NUMBER,
     from: process.env.FROM_NUMBER
   }, (err, message) ->
-    if err
-      winston.error err
+    if err?
+      winston.error(err)
     else
-      winston.info 'sent message', message
+      winston.info('sms message sent')
   )
 
 pollCraigslist = ->
   request(process.env.RSS_LINK)
     .pipe(new FeedParser())
     .on('error', (error) ->
-      console.log 'error', error
+      winston.error error
     )
     .on('meta', (meta) ->
       newPostings = []
